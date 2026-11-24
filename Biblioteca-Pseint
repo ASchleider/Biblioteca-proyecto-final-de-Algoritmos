@@ -1,0 +1,126 @@
+Algoritmo BibliotecaBasica
+	// Variables
+	Definir codigos Como Entero
+	Definir titulos, autores Como Caracter
+	Definir option, total, i, j, codigo, posicion Como Entero
+	Definir titulo, autor Como Caracter
+	
+	// Arreglos para guardar máximo 10 libros
+	Dimension codigos[10]
+	Dimension titulos[10]
+	Dimension autores[10]
+	
+	total <- 0  // cantidad de libros registrados
+	option <- 0
+	
+	// El menú se repite hasta que elija 6 (salir)
+	Mientras option <> 6 Hacer
+		Escribir "===== BIBLIOTECA ====="
+		Escribir "1. Registrar libro"
+		Escribir "2. Consultar libro"
+		Escribir "3. Modificar libro"
+		Escribir "4. Eliminar libro"
+		Escribir "5. Mostrar listado"
+		Escribir "6. Salir"
+		Escribir "Digite una opción:"
+		Leer option
+		
+		Segun option Hacer
+			
+			1:
+				// Registrar
+				Si total < 10 Entonces
+					Escribir "Digite el código:"
+					Leer codigo
+					Escribir "Digite el título:"
+					Leer titulo
+					Escribir "Digite el autor:"
+					Leer autor
+					total <- total + 1
+					codigos[total] <- codigo
+					titulos[total] <- titulo
+					autores[total] <- autor
+					Escribir "Libro registrado"
+				SiNo
+					Escribir "No hay espacio, la biblioteca está llena"
+				FinSi
+				
+			2:
+				// Consultar
+				Escribir "Digite el código del libro a consultar:"
+				Leer codigo
+				posicion <- 0
+				Para i <- 1 Hasta total Hacer
+					Si codigos[i] = codigo Entonces
+						posicion <- i
+					FinSi
+				FinPara
+				Si posicion = 0 Entonces
+					Escribir "El libro no existe"
+				SiNo
+					Escribir "Código: ", codigos[posicion]
+					Escribir "Título: ", titulos[posicion]
+					Escribir "Autor: ", autores[posicion]
+				FinSi
+				
+			3:
+				// Modificar
+				Escribir "Digite el código del libro a modificar:"
+				Leer codigo
+				posicion <- 0
+				Para i <- 1 Hasta total Hacer
+					Si codigos[i] = codigo Entonces
+						posicion <- i
+					FinSi
+				FinPara
+				Si posicion = 0 Entonces
+					Escribir "El libro no existe"
+				SiNo
+					Escribir "Digite el nuevo título:"
+					Leer titulos[posicion]
+					Escribir "Digite el nuevo autor:"
+					Leer autores[posicion]
+					Escribir "Libro modificado"
+				FinSi
+				
+			4:
+				// Eliminar
+				Escribir "Digite el código del libro a eliminar:"
+				Leer codigo
+				posicion <- 0
+				Para i <- 1 Hasta total Hacer
+					Si codigos[i] = codigo Entonces
+						posicion <- i
+					FinSi
+				FinPara
+				Si posicion = 0 Entonces
+					Escribir "El libro no existe"
+				SiNo
+					// Se corren los libros para tapar el espacio vacío
+					Para j <- posicion Hasta total - 1 Hacer
+						codigos[j] <- codigos[j + 1]
+						titulos[j] <- titulos[j + 1]
+						autores[j] <- autores[j + 1]
+					FinPara
+					total <- total - 1
+					Escribir "Libro eliminado"
+				FinSi
+				
+			5:
+				// Listado general
+				Si total = 0 Entonces
+					Escribir "No hay libros registrados"
+				SiNo
+					Para i <- 1 Hasta total Hacer
+						Escribir codigos[i], " - ", titulos[i], " - ", autores[i]
+					FinPara
+				FinSi
+				
+			6:
+				Escribir "Gracias por usar el sistema"
+				
+			De Otro Modo:
+				Escribir "Opción incorrecta"
+		FinSegun
+	FinMientras
+FinAlgoritmo
