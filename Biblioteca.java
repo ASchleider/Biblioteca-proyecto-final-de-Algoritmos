@@ -14,11 +14,10 @@ public class Biblioteca {
             System.out.println("\n===== SISTEMA DE BIBLIOTECA =====");
             System.out.println("1. Registrar libro");
             System.out.println("2. Consultar libros");
-            //System.out.println("3.  Modificar informacion de libro");
+            System.out.println("3. Modificar informacion de libro");
             System.out.println("4. Eliminar libro");
-            //System.out.println("5. Enseńar libros registrados");
-            System.out.println("6. Salir");
-            System.out.print("Seleccione una opcion: ");
+            System.out.println("5. Salir");
+            System.out.print("\nSeleccione una opcion: ");
 
             opcion = entrada.nextInt();
             entrada.nextLine();
@@ -26,7 +25,7 @@ public class Biblioteca {
             switch (opcion) {
 
                 case 1:
-                    System.out.print("Ingrese el nombre del libro: ");
+                    System.out.print("\nIngrese el nombre del libro a modificar: ");
                     String libro = entrada.nextLine();
 
                     libros.add(libro);
@@ -46,8 +45,31 @@ public class Biblioteca {
                     }
                     break;
 
-                //case 3: System.out.println("\n===== Modificar informacion de libro =====");
+                case 3: System.out.println("\n===== Modificar informacion de libro =====");
+                    
+                if (libros.isEmpty()) {
+                    System.out.println("No hay libros registrados.");
+                } else {
+                    for (int i = 0; i < libros.size(); i++) {
+                        System.out.println((i + 1) + ". " + libros.get(i));
+                    }
 
+                    System.out.println("Ingrese el numero del libro.");
+                    int numero = entrada.nextInt();
+                    entrada.nextLine();
+
+                    if (numero >= 1 && numero <= libros.size()) {
+                        System.out.print("Ingrese el nuevo nombre del libro: ");
+                        String nuevoNombre = entrada.nextLine();
+                        libros.set(numero - 1, nuevoNombre);
+                        System.out.println("Libro modificado correctamente.");
+
+                    } else {
+                        System.out.println("Numero no valido.");
+                    }
+                }
+                break;
+                
                 case 4:
                     System.out.println("\n===== ELIMINAR LIBRO =====");
 
@@ -71,10 +93,7 @@ public class Biblioteca {
                     }
                     break;
 
-                //case 5: System.out.println("\n===== Enseńar libros registrados =====");
-
-
-                case 6:
+                case 5:
                     System.out.println("Gracias por utilizar la biblioteca.");
                     break;
 
@@ -82,7 +101,7 @@ public class Biblioteca {
                     System.out.println("Opcion no valida.");
             }
 
-        } while (opcion != 6);
+        } while (opcion != 5);
 
         entrada.close();
     }
